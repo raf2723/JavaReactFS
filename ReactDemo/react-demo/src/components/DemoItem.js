@@ -1,7 +1,7 @@
 function DemoItem(props){
 
     return(
-        <tr>
+        <tr  onClick={()=>props.deleteItem(props.rowNumber)}>
             <th scope="row">{props.rowNumber}</th>
             <td>{props.rowDescription}</td>
             <td>{props.rowAssigned}</td>

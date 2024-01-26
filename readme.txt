@@ -1,0 +1,1 @@
+General repo for Java+React Full Stack practice

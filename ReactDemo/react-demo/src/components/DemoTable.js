@@ -14,9 +14,12 @@ function DemoTable(props) {
             <tbody>
                 {props.todos.map(todos => (
                     <DemoItem
+                        key={todos.rowNumber}
                         rowNumber={todos.rowNumber}
                         rowDescription={todos.rowDescription}
-                        rowAssigned={todos.rowAssigned} />
+                        rowAssigned={todos.rowAssigned}
+                        deleteItem={props.deleteItem}
+                    />
                 )
                 )}
             </tbody>

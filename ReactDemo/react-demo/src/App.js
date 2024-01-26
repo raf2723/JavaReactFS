@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import DemoTable from './components/DemoTable';
+import NewItemForm from './components/NewItemForm';
 
 function App() {
 
@@ -10,15 +11,28 @@ function App() {
 
   ])
 
-  const addItem = () => {
+  const [showForm,setShowForm] = useState(false);
+
+  const addItem = (description,assigned) => {
     if (todos.length > 0) {
       const newItem = {
         rowNumber: todos.length + 1,
-        rowDescription: "",
-        rowAssigned: "Ronnie"
+        rowDescription: description,
+        rowAssigned: assigned
 
       };
-      setTodos(todos=>[...todos,newItem])
+      setTodos(todos => [...todos, newItem])
+    }
+
+  }
+
+  const deleteItem = (rowNumber) => {
+
+    if (window.confirm("delete")) {
+      let filtered = todos.filter(function(value){
+        return value.rowNumber!== rowNumber
+      });
+      setTodos(filtered);
     }
 
   }
@@ -30,8 +44,13 @@ function App() {
           Your ToDOs
         </div>
         <div className="card-body">
-          <DemoTable todos={todos} />
-        <button className="btn btn-primary" onClick={addItem}>Add New Item</button>
+          <DemoTable todos={todos} deleteItem={deleteItem} />
+          <button className="btn btn-primary" onClick={()=> setShowForm(!showForm)}>
+            {showForm?'Close Form':'Add Item'}</button>
+
+          {showForm &&
+          <NewItemForm addItem={addItem} />
+          }
         </div>
       </div>
 
